@@ -1,0 +1,30 @@
+init <-
+  +state(~have(pie));
+  +state(~have(cake));
+  +state(~have(donut));
+  +percept(boss, ~have, pie);
+  +percept(boss, ~have, cake);
+  +percept(boss, ~have, donut);
+.
+
+beforeActions <-
+  -percept(all)
+.
+
++action(pinTask, C) : agentName(boss) <-
+  +percept(all, newTask, C)
+.
+
++action(bake, C) : agentClass(cooker) <-
+  -+state(have, C)
+.
+
+afterActions <-
+  +percept(boss, ~have, pie) : state(~have(pie));
+  +percept(boss, ~have, cake) : state(~have(cake));
+  +percept(boss, ~have, donut) : state(~have(donut));
+  
+  +percept(boss, have, pie) : state(have(pie));
+  +percept(boss, have, cake) : state(have(cake));
+  +percept(boss, have, donut) : state(have(donut))
+.

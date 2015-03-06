@@ -1,0 +1,11 @@
+beforeActions <-
+  -percept(all);
+.
+
++action(pinTask, C) : agentName(boss) <-
+  +percept(all, newTask, C);
+.
+
++action(bake, C) : agentClass(baker) <-
+  +percept(all, done, C)
+.

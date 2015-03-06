@@ -1,0 +1,12 @@
+/* Jason Project */
+
+MAS bakery {
+
+    infrastructure: Centralised
+
+    environment: Bakery("bakery.mas2j")
+
+    agents:
+    boss;
+    baker;
+}

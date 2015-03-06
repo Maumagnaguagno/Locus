@@ -1,0 +1,16 @@
+init <-
+  +state(doorLocked);
+  +percept(all, locked, door).
+
+beforeActions <-
+  -percept(all).
+
++action(lock) : agentClass(porter) <-
+  -+state(doorLocked).
+
++action(unlock) : agentClass(porter) <-
+  -+state(~doorLocked).
+
+afterActions <-
+  +percept(all, locked, door) : state(doorLocked);
+  +percept(all, ~locked, door) : state(~doorLocked).
