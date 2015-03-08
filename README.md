@@ -41,12 +41,12 @@ We hope the next examples show the power of the description. The first example i
 
 ### Room
 
-In the room application we have 3 agents sharing the same room:
+In the room application we have 3 agents sharing the same room with a door:
 - a porter, the only agent who controls the door
 - a claustrophobe, an agent who wants the door to be open
 - a paranoid, an agent who wants the door to be closed
 
-The environment contains a door, that starts either closed or opened. All agents perceive the state of the door. The claustrophobe or paranoid agent perceive the door in the correct position and does nothing, the other will ask the porter to fix the situation. The porter simply obeys, having no desire for any particular door state. Once the porter finishes the action the process restarts. A Prometheus design shows the room application:
+The environment's door starts either closed or opened. All agents perceive the state of the door. The claustrophobe or paranoid agent perceive the door in the correct position and does nothing, the other will ask the porter to fix the situation. The porter simply obeys, having no desire for any particular door state. Once the porter finishes the action the process restarts. A Prometheus design shows the room application:
 
 ![Prometheus design](examples/Room/Prometheus_Room.png)  
 
