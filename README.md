@@ -50,7 +50,7 @@ The environment contains a door, that starts either closed or opened. All agents
 
 ![Prometheus design](examples/Room/Prometheus_Room.png)  
 
-We can now follow the specification to build the agents
+We can follow the specification to build the agents and the environment:
 - [Porter](examples/Room/porter.asl)
   ```
   +!locked(door)[ source(paranoid)     ] : ~locked(door) <-   lock.
