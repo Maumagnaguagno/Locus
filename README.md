@@ -11,7 +11,7 @@ AgentSpeak uses plans to describe agent behavior. Those plans are made of a trig
 triggeringEvent : context <- body .
 ```
 
-With this in mind we created some constructs to affect the environment at specific points in time. **Init** is triggered at the initialization of the environment. **Stop** us triggered at the end of the simulation. **BeforeActions** and **afterActions** can be used to clear and add perceptions dependending of the current state.
+With this in mind we created some constructs to affect the environment at specific points in time. **init** is triggered at the initialization of the environment. **stop** is triggered at the end of the simulation. **beforeActions** and **afterActions** can be used to clear and add perceptions dependending of the current state.
 Each action added to the environment has a name and N terms, can be applied every time it is called with a context evaluating to true.
 
 ```
