@@ -37,7 +37,7 @@ The body of these constructs can be used to add or remove perceptions, add, remo
 
 ## Examples
 
-We hope the next examples show the power of the description. The first example is part of the Jason set of examples while the other two were created by us to explore what we considered important without adding complexity.
+We hope the next examples show the power of the description. The room example is part of the Jason set of examples and is maintained without modifications to show compatibility while the others were created by us to explore what we considered important without adding complex behaviors.
 
 ### Room
 
@@ -91,14 +91,36 @@ We can follow the specification to build the agents and the environment:
 
 ### Bakery react
 
+![Prometheus design](examples/BakeryReact/Prometheus_Bakery.png)  
 ToDo
 
-### Bakery loop
+## How it works internally
 
 ToDo
+
+## Execution
+
+With your **.esl** file ready you can launch Ruby to make the conversion to Java, the output is a file in the same folder of the file provided as input. 
+
+```
+ruby Locus.rb MyEnvironment.esl
+```
+
+Note that a file named RoomEnv.esl will generate RoomEnv.java and RoomEnv must be present in your setup file (**.mas2j**) to be used as your environment. Since we rely on the setup file to obtain the agent's class during run-time we expect to receive the setup filename in the arguments of the environment, like this:
+
+```
+MAS room {
+    infrastructure: Centralised
+    environment: RoomEnv("Room.mas2j")
+    executionControl: jason.control.ExecutionControl
+    agents: porter; claustrophobe; paranoid;
+}
+```
 
 ## ToDo's
 
 - Finish this readme
+- Add a list of commands
+- Add Travis CI to this project
 - Add perception checks
 - Add belief check
