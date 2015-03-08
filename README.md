@@ -48,7 +48,7 @@ In the room application we have 3 agents sharing the same room with a door:
 
 The environment's door starts either closed or opened. All agents perceive the state of the door. The claustrophobe or paranoid agent perceive the door in the correct position and does nothing, the other will ask the porter to fix the situation. The porter simply obeys, having no desire for any particular door state. Once the porter finishes the action the process restarts. A Prometheus design shows the room application:
 
-![Prometheus design](examples/Room/Prometheus_Room.png)  
+![Prometheus design of Room](examples/Room/Prometheus_Room.png)  
 
 We can follow the specification to build the agents and the environment:
 - [Porter](examples/Room/porter.asl)
@@ -59,17 +59,17 @@ We can follow the specification to build the agents and the environment:
 
 - [Paranoid](examples/Room/paranoid.asl)
   ```
-  +~locked(door) : true <- .send(porter,achieve,locked(door)). // ask porter to lock the door
+  +~locked(door) : true <- .send(porter, achieve, locked(door)).
   +locked(door)  : true <- .print("Thanks for locking the door!").
   ```
 
 - [Claustrophobe]((examples/Room/claustrophobe.asl))
   ```
-  +locked(door) : true <- .send(porter,achieve,~locked(door)). // ask porter to unlock the door
+  +locked(door) : true <- .send(porter, achieve, ~locked(door)).
   -locked(door) : true <- .print("Thanks for unlocking the door!").
   ```
 
-- [Room Environment](examples/Room/RoomEnv.esl) (already described in Locus, generate this [Java](examples/Room/RoomEnv.java)) 
+- [Room Environment](examples/Room/RoomEnv.esl) (already described in Locus, outputs this [Java](examples/Room/RoomEnv.java)) 
   ```
   init <-
     +state(doorLocked);
@@ -91,12 +91,12 @@ We can follow the specification to build the agents and the environment:
 
 ### Bakery react
 
-![Prometheus design](examples/BakeryReact/Prometheus_Bakery.png)  
+![Prometheus design of Bakery react](examples/BakeryReact/Prometheus_Bakery.png)  
 ToDo
 
 ## How it works internally
 
-ToDo
+A **Ruby** script works as [source-to-source compiler](http://en.wikipedia.org/wiki/Source-to-source_compiler), parsing the environment description, optimizing and converting to Java, the core language of Jason. Instead of creating the file from scratch, the script only complete specific spaces in the [template file](locus_env.java). Those spaces match the constructs like init, helper functions and internal variables. The current version already uses a few optimization tricks to avoid redundancy, the **Literals** are stored in variables to be reused as required. We hope to add more optimizations (if-else), and make the Literals more readable using a better name convention for the variables. We tested with Ruby 1.9.3 and above, the goal is to support 1.8.7 for some time in the future. Tests must be made to ensure compatibility with previous and future versions. One of the secondary goals is to split the parser from the output generator, making the output language agnostic and easy to extend as long it conforms with the triggering event format used.
 
 ## Execution
 
@@ -106,7 +106,7 @@ With your **.esl** file ready you can launch Ruby to make the conversion to Java
 ruby Locus.rb MyEnvironment.esl
 ```
 
-Note that a file named RoomEnv.esl will generate RoomEnv.java and RoomEnv must be present in your setup file (**.mas2j**) to be used as your environment. Since we rely on the setup file to obtain the agent's class during run-time we expect to receive the setup filename in the arguments of the environment, like this:
+Note that a file named ```RoomEnv.esl``` will generate ```RoomEnv.java``` and **RoomEnv** must be present in your setup file (**.mas2j**) to be used as your environment. Since we rely on the setup file to obtain the agent's class during run-time we expect to [receive the setup filename in the arguments of the environment](http://jason.sourceforge.net/faq/faq.html#SECTION00042000000000000000), like this:
 
 ```
 MAS room {
@@ -122,5 +122,6 @@ MAS room {
 - Finish this readme
 - Add a list of commands
 - Add Travis CI to this project
+- Separate parser from output generator methods
 - Add perception checks
 - Add belief check
