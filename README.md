@@ -1,7 +1,7 @@
 <img src="Logo.png" alt="Locus" width="94" height="47">
 --------------------
 
-[Jason](http://jason.sourceforge.net/) is an AgentSpeak interpreter for multi-agent system development. The agents are describbed in AgentSpeak, but the environment requires a Java description of how the actions and perceptions happen. We aim to close the gap between the descriptions with an AgentSpeak-like description of the environment, targeting new users and simpler examples. Locus generates the Java source required by Jason, giving the user an easier starting point to create complex environments without limiting the user to the tool. The Java output can be further modified if required.
+> [Jason](http://jason.sourceforge.net/) is an AgentSpeak interpreter for multi-agent system development. The agents are describbed in AgentSpeak, but the environment requires a Java description of how the actions and perceptions happen. We aim to close the gap between the descriptions with an AgentSpeak-like description of the environment, targeting new users and simpler examples. Locus generates the Java source required by Jason, giving the user an easier starting point to create complex environments without limiting the user to the tool. The Java output can be further modified if required.
 
 ## The Language
 
@@ -37,13 +37,57 @@ The body of these constructs can be used to add or remove perceptions, add, remo
 
 ## Examples
 
-We hope the next examples show the power of the description.
+We hope the next examples show the power of the description. The first example is part of the Jason set of examples while the other two were created by us to explore what we considered important without adding complexity.
 
 ### Room
 
-![](examples/Room/Prometheus_Room.png)  
+In the room application we have 3 agents sharing the same room:
+- a porter, the only agent who controls the door
+- a claustrophobe, an agent who wants the door to be open
+- a paranoid, an agent who wants the door to be closed
 
-ToDo
+The environment contains a door, that starts either closed or opened. All agents perceive the state of the door. The claustrophobe or paranoid agent perceive the door in the correct position and does nothing, the other will ask the porter to fix the situation. The porter simply obeys, having no desire for any particular door state. Once the porter finishes the action the process restarts. A Prometheus design shows the room application:
+
+![Prometheus design](examples/Room/Prometheus_Room.png)  
+
+We can now follow the specification to build the agents
+- [Porter](examples/Room/porter.asl)
+  ```
+  +!locked(door)[ source(paranoid)     ] : ~locked(door) <-   lock.
+  +!~locked(door)[source(claustrophobe)] :  locked(door) <- unlock.
+  ```
+
+- [Paranoid](examples/Room/paranoid.asl)
+  ```
+  +~locked(door) : true <- .send(porter,achieve,locked(door)). // ask porter to lock the door
+  +locked(door)  : true <- .print("Thanks for locking the door!").
+  ```
+
+- [Claustrophobe]((examples/Room/claustrophobe.asl))
+  ```
+  +locked(door) : true <- .send(porter,achieve,~locked(door)). // ask porter to unlock the door
+  -locked(door) : true <- .print("Thanks for unlocking the door!").
+  ```
+
+- [Room Environment](examples/Room/RoomEnv.esl) (already described in Locus, generate this [Java](examples/Room/RoomEnv.java)) 
+  ```
+  init <-
+    +state(doorLocked);
+    +percept(all, locked, door).
+  
+  beforeActions <-
+    -percept(all).
+  
+  +action(lock) : agentClass(porter) <-
+    -+state(doorLocked).
+  
+  +action(unlock) : agentClass(porter) <-
+    -+state(~doorLocked).
+  
+  afterActions <-
+    +percept(all, locked, door) : state(doorLocked);
+    +percept(all, ~locked, door) : state(~doorLocked).
+  ```
 
 ### Bakery react
 
