@@ -4,9 +4,10 @@ require './Locus.rb'
 class Test_Locus < Test::Unit::TestCase
 
   def compare_files(filename)
+    print Dir.pwd
     # Result is compared with original file tested with Jason
-    result = Locus.to_java("examples\\#{filename}.esl")
-    original = IO.read("examples\\#{filename}.java")
+    result = Locus.to_java(".\\examples\\#{filename}.esl")
+    original = IO.read(".\\examples\\#{filename}.java")
     # Ignore timestamp
     result.sub!(/Generated at .*$/,'')
     original.sub!(/Generated at .*$/,'')
