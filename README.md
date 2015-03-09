@@ -35,11 +35,11 @@ The body of these constructs can be used to add or remove perceptions, add, remo
 -+state(predicate[, terms]);
 ```
 
-## Examples
+## [Examples](examples)
 
 We hope the next examples show the power of the description. The room example is part of the Jason set of examples and is maintained without modifications to show compatibility while the others were created by us to explore what we considered important without adding complex behaviors.
 
-### Room
+### [Room](examples/Room)
 
 In the room application we have 3 agents sharing the same room with a door:
 - a porter, the only agent who controls the door
@@ -63,13 +63,13 @@ We can follow the specification to build the agents and the environment:
   +locked(door)  : true <- .print("Thanks for locking the door!").
   ```
 
-- [Claustrophobe]((examples/Room/claustrophobe.asl))
+- [Claustrophobe](examples/Room/claustrophobe.asl)
   ```
   +locked(door) : true <- .send(porter, achieve, ~locked(door)).
   -locked(door) : true <- .print("Thanks for unlocking the door!").
   ```
 
-- [Room Environment](examples/Room/RoomEnv.esl) (already described in Locus, outputs this [Java](examples/Room/RoomEnv.java)) 
+- [Room Environment](examples/Room/RoomEnv.esl) (already described in Locus, outputs this [Java](examples/Room/RoomEnv.java) 
   ```
   init <-
     +state(doorLocked);
@@ -89,10 +89,55 @@ We can follow the specification to build the agents and the environment:
     +percept(all, ~locked, door) : state(~doorLocked).
   ```
 
-### Bakery react
+### [Bakery React](examples/BakeryReact)
+
+In the bakery react application we have 2 agents:
+- a boss, an agent that perceives and reacts to the lack of the items to sell in the bakery
+- a baker, the agent responsible to make the items in the bakery
+
+The environment starts without some items, the boss perceives the lack of them. And every time an item is not in the shelf a client can not buy it, the boss pins a task to do more of this item in a board, the baker will perceive this task and bake. The baker simply obeys the boss. Both agents simply react to perceptions from the environment. A Prometheus design shows the bakery react application:
 
 ![Prometheus design of Bakery react](examples/BakeryReact/Prometheus_Bakery.png)  
-ToDo
+
+We can follow the specification to build the agents and the environment:
+- [Boss](examples/BakeryReact/boss.asl)
+  ```
+  +~have(C) <- pinTask(C).
+  +have(C) <- .print("Done ", C).
+  ```
+
+- [Baker](examples/BakeryReact/baker.asl)
+  ```
+  +newTask(X) <- bake(X).
+  ```
+
+- [Bakery Environment](examples/BakeryReact/Bakery.esl)
+  ```
+  init <-
+    +state(~have(pie));
+    +state(~have(cake));
+    +state(~have(donut));
+    +percept(boss, ~have, pie);
+    +percept(boss, ~have, cake);
+    +percept(boss, ~have, donut).
+
+  beforeActions <-
+    -percept(all).
+
+  +action(pinTask, C) : agentName(boss) <-
+    +percept(all, newTask, C).
+    
+  +action(bake, C) : agentClass(cooker) <-
+    -+state(have, C).
+    
+  afterActions <-
+    +percept(boss, ~have, pie) : state(~have(pie));
+    +percept(boss, ~have, cake) : state(~have(cake));
+    +percept(boss, ~have, donut) : state(~have(donut));
+    +percept(boss, have, pie) : state(have(pie));
+    +percept(boss, have, cake) : state(have(cake));
+    +percept(boss, have, donut) : state(have(donut)).
+  ```
 
 ## How it works internally
 
@@ -119,9 +164,8 @@ MAS room {
 
 ## ToDo's
 
-- Finish this readme
-- Add a list of commands
 - Add Travis CI to this project
 - Separate parser from output generator methods
+- Add a list of commands to the readme
 - Add perception checks
 - Add belief check
