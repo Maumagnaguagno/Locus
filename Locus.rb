@@ -352,10 +352,7 @@ module Locus
       template.sub!('<MAP_AGENTS_STRUCTURE>','')
       template.sub!('<MAP_AGENTS>','')
     end
-    # Save to file
-    filename = filename.sub(/esl$/,'java')
-    open(filename, 'w+') {|file| file << template}
-    puts "Saved to file #{filename}"
+    template
   end
 end
 
@@ -366,10 +363,16 @@ end
 if $0 == __FILE__
   begin
     if ARGV.size == 1 and ARGV.first != '-h'
-      if File.exist?(ARGV.first)
-        Locus.to_java(ARGV.first)
+      filename = ARGV.first
+      if File.exist?(filename)
+        # Convert
+        javaenv = Locus.to_java(filename)
+        # Save to file
+        filename = filename.sub(/esl$/,'java')
+        open(filename, 'w+') {|file| file << javaenv}
+        puts "Saved to file #{filename}"
       else
-        puts "File not found: #{ARGV.first}!"
+        puts "File not found: #{filename}!"
       end
     else
       puts "Use #$0 filename.esl"
