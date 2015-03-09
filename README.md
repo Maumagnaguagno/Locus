@@ -139,9 +139,9 @@ We can follow the specification to build the agents and the environment:
     +percept(boss, have, donut) : state(have(donut)).
   ```
 
-## How it works internally
+## How it works
 
-A **Ruby** script works as [source-to-source compiler](http://en.wikipedia.org/wiki/Source-to-source_compiler), parsing the environment description, optimizing and converting to Java, the core language of Jason. Instead of creating the file from scratch, the script only complete specific spaces in the [template file](locus_env.java). Those spaces match the constructs like init, helper functions and internal variables. The current version already uses a few optimization tricks to avoid redundancy, the **Literals** are stored in variables to be reused as required. We hope to add more optimizations (if-else), and make the Literals more readable using a better name convention for the variables. We tested with Ruby 1.9.3 and above, the goal is to support 1.8.7 for some time in the future. Tests must be made to ensure compatibility with previous and future versions. One of the secondary goals is to split the parser from the output generator, making the output language agnostic and easy to extend as long as it conforms with the triggering event format used.
+A [Ruby script](Locus.rb) works as a [source-to-source compiler](http://en.wikipedia.org/wiki/Source-to-source_compiler), parsing the environment description, optimizing and converting to Java, the core language of Jason. Instead of creating the file from scratch, the script only fill the [template file](locus_env.java). The blanks filled match the constructs like init, helper functions and internal variables required to work. The current version already uses a few optimization tricks to avoid redundancy, the **Literals** are stored in variables to be reused as required. We hope to add more optimizations (if-else), and make the Literals more readable using a better name convention for the variables. We tested with Ruby 1.9.3 and above, the goal is to support 1.8.7 for some time in the future. Tests must be made to ensure compatibility with previous and future versions. One of the secondary goals is to split the parser from the output generator, making the output language agnostic and easy to extend as long as it conforms with the triggering event format used.
 
 ## Execution
 
