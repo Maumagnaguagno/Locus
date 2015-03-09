@@ -69,7 +69,7 @@ We can follow the specification to build the agents and the environment:
   -locked(door) : true <- .print("Thanks for unlocking the door!").
   ```
 
-- [Room Environment](examples/Room/RoomEnv.esl) (already described in Locus, outputs this [Java](examples/Room/RoomEnv.java) 
+- [Room Environment](examples/Room/RoomEnv.esl) ([see Java output](examples/Room/RoomEnv.java))
   ```
   init <-
     +state(doorLocked);
@@ -111,7 +111,7 @@ We can follow the specification to build the agents and the environment:
   +newTask(X) <- bake(X).
   ```
 
-- [Bakery Environment](examples/BakeryReact/Bakery.esl)
+- [Bakery Environment](examples/BakeryReact/Bakery.esl) ([see Java output](examples/BakeryReact/Bakery.java))
   ```
   init <-
     +state(~have(pie));
@@ -164,7 +164,7 @@ MAS room {
 
 ## ToDo's
 
-- Add Travis CI to this project
+- Add **Travis CI** to this project
 - Separate parser from output generator methods
 - Add a list of commands to the readme
 - Add perception checks
