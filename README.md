@@ -182,9 +182,10 @@ MAS room {
 
 ## ToDo's
 
-- Add **Travis CI** to this project
-- Separate parser from output generator methods, being able to generate other outputs
-  - This would makes Locus output language agnostic and easy to extend.
+- Add more tests
+- Check version of Jason jar being used here
 - Add a list of commands to the readme
 - Add perception checks
 - Add belief check
+- Separate parser from output generator methods, being able to generate other outputs
+  - This would makes Locus output language agnostic and easy to extend.
