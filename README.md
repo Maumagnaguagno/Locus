@@ -145,7 +145,17 @@ We can follow the specification to build the agents and the environment:
 
 ## How it works
 
-A [Ruby script](Locus.rb) works as a [source-to-source compiler](http://en.wikipedia.org/wiki/Source-to-source_compiler), parsing the environment description, optimizing and converting to Java, the core language of Jason. Instead of creating the file from scratch, the script only fill the [template file](locus_env.java). The blanks filled match the constructs like init, helper functions and internal variables required to work. The current version already uses a few optimization tricks to avoid redundancy, the **Literals** are stored in variables to be reused as required. We hope to add more optimizations (if-else), and make the Literals more readable using a better name convention for the variables. We tested with Ruby 1.9.3 and above, the goal is to support 1.8.7 for some time in the future. Tests must be made to ensure compatibility with previous and future versions. One of the secondary goals is to split the parser from the output generator, making the output language agnostic and easy to extend as long as it conforms with the triggering event format used.
+A [Ruby script](Locus.rb) works as a [source-to-source compiler](http://en.wikipedia.org/wiki/Source-to-source_compiler), parsing the environment description, optimizing and converting to Java, the core language of Jason. Instead of creating the file from scratch, the script only fill the [template file](locus_env.java). The blanks filled match the constructs like init, helper functions and internal variables required to work. The current version already uses a few optimization tricks to avoid redundancy, the **Literals** are stored in variables to be reused as required. We hope to add more optimizations (if-else), and make the Literals more readable using a better name convention for the variables.
+
+## Testing
+
+Tests were be made to ensure compatibility with previous and future versions. We are testing with Travis-CI to support the following versions of Ruby:
+- MRI 1.8.7
+- MRI 1.9.3
+- MRI 2.0.0
+- MRI 2.1.0
+- [JRuby](http://jruby.org) mode 1.8
+- [JRuby](http://jruby.org) mode 1.9
 
 ## Execution
 
@@ -173,7 +183,8 @@ MAS room {
 ## ToDo's
 
 - Add **Travis CI** to this project
-- Separate parser from output generator methods
+- Separate parser from output generator methods, being able to generate other outputs
+  - This would makes Locus output language agnostic and easy to extend.
 - Add a list of commands to the readme
 - Add perception checks
 - Add belief check
