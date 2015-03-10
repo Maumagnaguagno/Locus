@@ -14,6 +14,8 @@
 # - Structured as a module
 # - Recursive descent parser
 # - Metaprogramming to easily extend the conversion
+# Mar 2015
+# - Tests
 #-----------------------------------------------
 # TODOs
 # - Multi-line comment support /* Comment */
@@ -23,7 +25,6 @@
 # - Complex formulas in conditions (&/|/~/not/())
 # - Unifications
 # - Integer support for non string terms
-# - Tests
 #-----------------------------------------------
 
 module Locus
