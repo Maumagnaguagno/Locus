@@ -9,15 +9,13 @@
 
 ## The Language
 
-AgentSpeak uses plans to describe agent behavior. Those plans are made of a triggering event, a new perception or belief, happening at a given context, current state, is enough to execute the action in the body of the plan.
-
+AgentSpeak uses plans to describe agent behavior. Those plans are made of a triggering event, a new perception or belief, happening at a given context, current state, is enough to execute the action in the body of the plan. This is a simple way to define which, when and what happens for an agent.
 ```
 triggeringEvent : context <- body .
 ```
 
-With this in mind we created some constructs to affect the environment at specific points in time. **init** is triggered at the initialization of the environment. **stop** is triggered at the end of the simulation. **beforeActions** and **afterActions** can be used to clear and add perceptions dependending of the current state.
+With this in mind we created a tool to parse an environment description in this form and output the Java expected environment of Jason. With this we hope to make the system easier for new users while being able to keep environment descriptions safe from the revisions of Jason's API. In order to achieve this we created some constructs to affect the environment at specific points in time. **init** is triggered at the initialization of the environment. **stop** is triggered at the end of the simulation. **beforeActions** and **afterActions** can be used to clear and add perceptions dependending of the current state.
 Each action added to the environment has a name and N terms, can be applied every time it is called with a context evaluating to true.
-
 ```
 init                                  <- body.
 
@@ -29,15 +27,32 @@ stop                                  <- body.
 ```
 
 The body of these constructs can be used to add or remove perceptions, add, remove or overwrite the current state.
-
 ```
 +percept(agent|all, predicate[, terms]) : context.
 -percept(agent|all, predicate[, terms]) : context.
+-percept(all).
+-percept(bob).
 
-+state(predicate[, terms]);
--state(predicate[, terms]);
--+state(predicate[, terms]);
++state(predicate[, terms]).
+-state(predicate[, terms]).
+-+state(predicate[, terms]).
 ```
+
+For the context you can check state and agent definition, but the system currently does not parse complex operation (with and/or/not):
+
+```
++percept(bob, danger) : agentClass(human).
++percept(bob, danger) : agentName(bobs_friend).
++percept(bob, danger) : state(on, bob, fire).
+```
+
+Perhaps the most interesting feature is to handle easily the terms of an action. So far we are supporting only strings, but will add more as required. Beware that free-variables can only be used inside an action context.
+
+```
++action(bake, C) : agentClass(cooker) <- -+state(have, C).
+```
+
+In case you need to do something in Java to describe the behavior of your environment we are exposing **include** and any command inside of the main constructs that can not be parsed by our tool. Therefore you can include any Java library required and use inline Java as normal code. We do not have tests for this feature and recommend you to find a generic abstraction for your case and request support instead of using this last resort.
 
 ## [Examples](examples)
 
@@ -149,13 +164,15 @@ A [Ruby script](Locus.rb) works as a [source-to-source compiler](http://en.wikip
 
 ## Testing
 
-Tests were be made to ensure compatibility with previous and future versions. We are testing with Travis-CI to support the following versions of Ruby:
-- MRI 1.8.7
-- MRI 1.9.3
-- MRI 2.0.0
-- MRI 2.1.0
-- [JRuby](http://jruby.org) mode 1.8
-- [JRuby](http://jruby.org) mode 1.9
+Tests were be made to ensure compatibility with previous and future versions. We are testing with Travis-CI to support the following versions/flavors of Ruby:
+- [MRI](http://en.wikipedia.org/wiki/Ruby_MRI) (C)
+  - 1.8.7
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+- [JRuby](http://en.wikipedia.org/wiki/JRuby)(Java)
+  - mode 1.8
+  - mode 1.9
 
 ## Execution
 
@@ -184,8 +201,14 @@ MAS room {
 
 - Add more tests
 - Check version of Jason jar being used here
-- Add a list of commands to the readme
-- Add perception checks
-- Add belief check
+- Add multi-line comment support
+- Optional condition block for actions
+- Optional condition block for afterActions and beforeActions
+- Arity check for actions
+- Complex formulas in conditions (&/|/~/not/())
+- Unifications
+- Add perception checks (context)
+- Add belief check (context)
+- Add different term type support
 - Separate parser from output generator methods, being able to generate other outputs
   - This would makes Locus output language agnostic and easy to extend.
