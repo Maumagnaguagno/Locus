@@ -170,7 +170,7 @@ Tests were be made to ensure compatibility with previous and future versions. We
   - 1.9.3
   - 2.0.0
   - 2.1.0
-- [JRuby](http://en.wikipedia.org/wiki/JRuby)(Java)
+- [JRuby](http://en.wikipedia.org/wiki/JRuby) (Java)
   - mode 1.8
   - mode 1.9
 
