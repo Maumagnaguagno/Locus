@@ -38,7 +38,7 @@ The body of these constructs can be used to add or remove perceptions, add, remo
 -+state(predicate[, terms]).
 ```
 
-For the context you can check state and agent definition, but the system currently does not parse complex operation (with and/or/not):
+For the context you can check state and agent definition, but the system currently does not parse complex operations (with and/or/not, only an atom):
 
 ```
 +percept(bob, danger) : agentClass(human).
@@ -46,7 +46,7 @@ For the context you can check state and agent definition, but the system current
 +percept(bob, danger) : state(on, bob, fire).
 ```
 
-Perhaps the most interesting feature is to handle easily the terms of an action. So far we are supporting only strings, but will add more as required. Beware that free-variables can only be used inside an action context.
+Perhaps the most interesting feature is to easily handle the terms of an action. So far we are supporting only strings, but we will add more as required. Beware that free-variables can only be used inside an action context in the current version.
 
 ```
 +action(bake, C) : agentClass(cooker) <- -+state(have, C).
