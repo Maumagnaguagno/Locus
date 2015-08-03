@@ -1,6 +1,6 @@
 <img src="Logo.png" alt="Locus" width="94" height="47">
 <a href="https://travis-ci.org/Maumagnaguagno/Locus" target="_blank">
-<img src="https://travis-ci.org/Maumagnaguagno/Locus.png"  title="Build Status" border="0"/>
+<img src="https://travis-ci.org/Maumagnaguagno/Locus.svg"  title="Build Status" border="0"/>
 </a>
 
 --------------------
