@@ -197,6 +197,13 @@ MAS room {
 }
 ```
 
+## Contribution
+
+The Locus was contributed by Mauricio Magnaguagno, Ramon Fraga Pereira, and Anibal Solon Heisfiled.
+To cite Locus, please cite this [paper](http://www2.ic.uff.br/~wesaac2015/Proceedings-WESAAC-2015.pdf):
+
+Ramon Fraga Pereira, Mauricio Magnaguagno, Anibal Solon Heisfiled and Felipe Meneguzzi (2015). LOCUS: An environment description language for JASON, In WESAAC 2015. pp. 21-32.
+
 ## ToDo's
 
 - Add more tests
