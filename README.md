@@ -164,7 +164,7 @@ A [Ruby script](Locus.rb) works as a [source-to-source compiler](http://en.wikip
 
 ## Testing
 
-Tests were be made to ensure compatibility with previous and future versions. We are testing with Travis-CI to support the following versions/flavors of Ruby:
+Tests were made to ensure compatibility with previous and future versions. We are testing with Travis-CI to support the following versions/flavors of Ruby:
 - [MRI](http://en.wikipedia.org/wiki/Ruby_MRI) (C)
   - 1.8.7
   - 1.9.3
