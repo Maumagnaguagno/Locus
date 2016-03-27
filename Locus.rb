@@ -90,7 +90,7 @@ module Locus
               puts "Error: No match for #{event}"
             end
           end
-          group = ''
+          group.clear
           next
         end
       when '"'
@@ -368,11 +368,10 @@ if $0 == __FILE__
         # Convert
         javaenv = Locus.to_java(filename)
         # Save to file
-        filename = filename.sub(/esl$/,'java')
-        open(filename, 'w+') {|file| file << javaenv}
+        filename.sub!(/esl$/,'java')
+        IO.write(filename, javaenv)
         puts "Saved to file #{filename}"
-      else
-        puts "File not found: #{filename}!"
+      else puts "File not found: #{filename}!"
       end
     else
       puts "Use #$0 filename.esl"
