@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative 'Locus'
+require './Locus'
 
 class Test_Locus < Test::Unit::TestCase
 
