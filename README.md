@@ -211,7 +211,7 @@ or
 ruby Locus.rb projects\thisproject\MyEnvironment.esl
 ```
 
-Note that a file named ```RoomEnv.esl``` will generate ```RoomEnv.java``` and **RoomEnv** must be present in your setup file (**.mas2j**) to be used as your environment.
+Note that a file named ``RoomEnv.esl`` will generate ``RoomEnv.java`` and **RoomEnv** must be present in your setup file (**.mas2j**) to be used as your environment.
 Since we rely on the setup file to obtain the agent's class during run-time we expect to [receive the setup filename in the arguments of the environment](http://jason.sourceforge.net/faq/faq.html#SECTION00042000000000000000), like this:
 
 ```
