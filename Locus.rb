@@ -139,9 +139,9 @@ module Locus
         string << (prefix == '+' ? 'addPercept(' : 'removePercept(')
         string << "\"#{target}\", " if target != 'all'
         literal = "Literal.parseLiteral(\"#{functor}"
-        grounded = argument_parser(literal, arguments, terms)
+        ground = argument_parser(literal, arguments, terms)
         literal << '")'
-        if grounded
+        if ground
           index = @literals.index(literal)
           if index
             string << "literal#{index}"
@@ -199,13 +199,13 @@ module Locus
   #-----------------------------------------------
 
   def argument_parser(str, arguments, terms)
-    grounded = true
+    ground = true
     unless arguments.empty?
       str << '('
       arguments.each_with_index {|arg, index|
         if arg =~ /^[A-Z]/
           str << "\" + action.getTerm(#{terms.index(arg)}).toString() + \""
-          grounded = false
+          ground = false
         else
           str << arg
         end
@@ -213,7 +213,7 @@ module Locus
       }
       str << ')'
     end
-    grounded
+    ground
   end
 
   #-----------------------------------------------
@@ -374,10 +374,9 @@ if $0 == __FILE__
       else puts "File not found: #{filename}!"
       end
     else
-      puts "Use #$0 filename.esl"
+      puts 'Use Locus filename.esl'
     end
   rescue
     puts $!, $@
-    STDIN.gets
   end
 end
