@@ -132,10 +132,7 @@ module Locus
           string << ") {\n  " << indent
         end
       end
-      if not functor
-        string << 'clearPercepts('
-        string << "\"#{target}\"" if target != 'all'
-      else
+      if functor
         string << (prefix == '+' ? 'addPercept(' : 'removePercept(')
         string << "\"#{target}\", " if target != 'all'
         literal = "Literal.parseLiteral(\"#{functor}"
@@ -152,6 +149,9 @@ module Locus
         else
           string << literal
         end
+      else
+        string << 'clearPercepts('
+        string << "\"#{target}\"" if target != 'all'
       end
       string << ')'
       string << ";\n" if close_command
