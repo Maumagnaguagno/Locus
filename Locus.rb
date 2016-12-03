@@ -6,8 +6,8 @@
 # Ramon Pereira
 # Anibal Solon
 #-----------------------------------------------
-# AgentSpeak-like environment specification language for Jason
-# Source-to-source compiler
+# - AgentSpeak-like environment specification language for Jason
+# - Source-to-source compiler
 #-----------------------------------------------
 # Feb 2015
 # - Created
