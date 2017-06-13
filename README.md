@@ -1,9 +1,4 @@
-<img src="Logo.png" alt="Locus" width="94" height="47">
-<a href="https://travis-ci.org/Maumagnaguagno/Locus" target="_blank">
-<img src="https://travis-ci.org/Maumagnaguagno/Locus.svg"  title="Build Status" border="0"/>
-</a>
-
---------------------
+![Locus](Logo.png) [![Build Status](https://travis-ci.org/Maumagnaguagno/Locus.svg)](https://travis-ci.org/Maumagnaguagno/Locus)
 
 > [Jason](http://jason.sourceforge.net/) is an AgentSpeak interpreter for multi-agent system development.
 The agents are describbed in AgentSpeak, but the environment requires a Java description of how the actions and perceptions happen.
@@ -16,8 +11,9 @@ The Java output can be further modified if required.
 AgentSpeak uses plans to describe agent behavior.
 Those plans are made of a triggering event, a new perception or belief, happening at a given context, current state, is enough to execute the action in the body of the plan.
 This is a simple way to define which, when and what happens for an agent.
+
 ```
-triggeringEvent : context <- body .
+triggeringEvent : context <- body.
 ```
 
 With this in mind we created a tool to parse an environment description in this form and output the Java expected environment of Jason.
@@ -25,17 +21,19 @@ With this we hope to make the system easier for new users while being able to ke
 In order to achieve this we created some constructs to affect the environment at specific points in time. **init** is triggered at the initialization of the environment.
 **stop** is triggered at the end of the simulation. **beforeActions** and **afterActions** can be used to clear and add perceptions dependending of the current state.
 Each action added to the environment has a name and N terms, can be applied every time it is called with a context evaluating to true.
+
 ```
-init                                  <- body.
+init                             <- body.
 
-beforeActions                         <- body.
-+action(name[, terms]) : context      <- body.
-afterActions                          <- body.
+beforeActions                    <- body.
++action(name[, terms]) : context <- body.
+afterActions                     <- body.
 
-stop                                  <- body.
+stop                             <- body.
 ```
 
 The body of these constructs can be used to add or remove perceptions, add, remove or overwrite the current state.
+
 ```
 +percept(agent|all, predicate[, terms]) : context.
 -percept(agent|all, predicate[, terms]) : context.
@@ -225,10 +223,9 @@ MAS room {
 
 ## Contribution
 
-The Locus was contributed by Mauricio Magnaguagno, Ramon Fraga Pereira, and Anibal Solon Heinsfeld.
 To cite Locus, please cite this [paper](http://www2.ic.uff.br/~wesaac2015/Proceedings-WESAAC-2015.pdf):
 
-Ramon Fraga Pereira, Mauricio Magnaguagno, Anibal Solon Heinsfeld and Felipe Meneguzzi (2015). LOCUS: An environment description language for JASON, In WESAAC 2015. pp. 21-32.
+> Ramon Fraga Pereira, Mauricio Magnaguagno, Anibal Solon Heinsfeld and Felipe Meneguzzi (2015). LOCUS: An environment description language for JASON, In WESAAC 2015. pp. 21-32.
 
 ## ToDo's
 
