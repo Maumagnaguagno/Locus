@@ -98,10 +98,7 @@ module Locus
       when '('
         count_paren += 1 unless string
       when ')'
-        unless string
-          count_paren -= 1
-          raise "Unmatched parentheses for #{str}" if count_paren < 0
-        end
+        raise "Unmatched parentheses for #{str}" if not string and (count_paren -= 1) < 0
       end
       group << c
     }
