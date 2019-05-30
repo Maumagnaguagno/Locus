@@ -184,19 +184,6 @@ The blanks filled match the constructs like init, helper functions and internal 
 The current version already uses a few optimization tricks to avoid redundancy, the **Literals** are stored in variables to be reused as required.
 We hope to add more optimizations (if-else), and make the Literals more readable using a better name convention for the variables.
 
-## Testing
-
-Tests were made to ensure compatibility with previous and future versions.
-We are testing with Travis-CI to support the following versions/flavors of Ruby:
-- [MRI](http://en.wikipedia.org/wiki/Ruby_MRI) (C)
-  - 1.9.3
-  - 2.0.0
-  - 2.1.5
-  - 2.2.0
-  - 2.3.0
-- [JRuby](http://en.wikipedia.org/wiki/JRuby) (Java)
-  - mode 1.9
-
 ## Execution
 
 With your **.esl** file ready you can launch Ruby to make the conversion to Java, the output is a file in the same folder of the file provided as input.
