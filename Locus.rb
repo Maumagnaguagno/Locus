@@ -75,19 +75,16 @@ module Locus
         if count_paren.zero? and not string
           # Only triggering events can be matched, several blocks are optional
           # [prefix] event[(terms)] [: context] [<- body]
-          if group =~ /^\s*([-+~]*)(\w+)(?:\((.*?)\))?(?:\s*:\s*(.+?))?(?:\s*<-\s*(.+))?\s*$/
-            prefix = $1
-            event = $2
-            terms = $3
-            context = $4
-            body = $5
-            if respond_to?(event)
-              prefix = nil if prefix.empty?
+          if group =~ /^\s*([-+~]+)?(\w+)(?:\((.*?)\))?(?:\s*:\s*(.+?))?(?:\s*<-\s*(.+))?\s*$/
+            if respond_to?(event = $2)
+              prefix = $1
+              terms = $3
+              context = $4
+              body = $5
               terms = terms.split(/\s*,\s*/) if terms
               body = body.split(/\s*;\s*/) if body
               send(event, prefix, terms, context, body)
-            else
-              puts "Error: No match for #{event}"
+            else puts "Error: No match for #{event}"
             end
           end
           group.clear
