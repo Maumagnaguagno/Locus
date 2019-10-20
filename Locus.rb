@@ -270,7 +270,7 @@ module Locus
   def include(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} is ignored for include command" if prefix
     puts "Warning: context #{context} is ignored for include command" if context
-    terms.each {|t| @user_imports << t} if terms
+    @user_imports.concat(terms) if terms
     puts "Warning: context #{context} is ignored for include command" if context
     puts "Warning: body #{body} is ignored for include command" if body
   end
@@ -279,28 +279,28 @@ module Locus
     puts "Warning: prefix #{prefix} is ignored for init command" if prefix
     puts "Warning: terms #{terms} is ignored for init" if terms
     puts "Warning: context #{context} is ignored for init" if context
-    body.each {|t| @init << t} if body
+    @init.concat(body) if body
   end
 
   def stop(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} is ignored for stop command" if prefix
     puts "Warning: terms #{terms} is ignored for stop" if terms
     puts "Warning: context #{context} is ignored for stop" if context
-    body.each {|t| @stop << t} if body
+    @stop.concat(body) if body
   end
 
   def beforeActions(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} is ignored for beforeActions command" if prefix
     puts "Warning: terms #{terms} is ignored for beforeActions" if terms
     puts "Warning: context #{context} is ignored for beforeActions" if context
-    body.each {|t| @before << t} if body
+    @before.concat(body) if body
   end
 
   def afterActions(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} is ignored for afterActions command" if prefix
     puts "Warning: terms #{terms} is ignored for afterActions" if terms
     puts "Warning: context #{context} is ignored for afterActions" if context
-    body.each {|t| @after << t} if body
+    @after.concat(body) if body
   end
 
   def action(prefix, terms, context, body)
