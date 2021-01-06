@@ -83,7 +83,7 @@ The claustrophobe or paranoid agent perceive the door in the correct position an
 The porter simply obeys, having no desire for any particular door state.
 Once the porter finishes the action the process restarts. A Prometheus design shows the room application:
 
-![Prometheus design of Room](examples/Room/Prometheus_Room.png)  
+![Prometheus design of Room](examples/Room/Prometheus_Room.svg)  
 
 We can follow the specification to build the agents and the environment:
 - [Porter](examples/Room/porter.asl)
@@ -134,7 +134,7 @@ The environment starts without some items, the boss perceives the lack of them.
 And every time an item is not in the shelf a client can not buy it, the boss pins a task to do more of this item in a board, the baker will perceive this task and bake.
 The baker simply obeys the boss. Both agents simply react to perceptions from the environment. A Prometheus design shows the bakery react application:
 
-![Prometheus design of Bakery react](examples/BakeryReact/Prometheus_Bakery.png)
+![Prometheus design of Bakery react](examples/BakeryReact/Prometheus_Bakery.svg)
 
 We can follow the specification to build the agents and the environment:
 - [Boss](examples/BakeryReact/boss.asl)
