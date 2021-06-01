@@ -1,4 +1,4 @@
-![Locus](Logo.png) [![Build Status](https://travis-ci.org/Maumagnaguagno/Locus.svg)](https://travis-ci.org/Maumagnaguagno/Locus) [![Actions Status](https://github.com/Maumagnaguagno/Locus/workflows/build/badge.svg)](https://github.com/Maumagnaguagno/Locus/actions)
+![Locus](Logo.png) [![Actions Status](https://github.com/Maumagnaguagno/Locus/workflows/build/badge.svg)](https://github.com/Maumagnaguagno/Locus/actions)
 
 > [Jason](http://jason.sourceforge.net/) is an AgentSpeak interpreter for multi-agent system development.
 The agents are describbed in AgentSpeak, but the environment requires a Java description of how the actions and perceptions happen.
