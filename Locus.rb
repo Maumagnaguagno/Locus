@@ -344,8 +344,8 @@ module Locus
       template.sub!('<MAP_AGENTS_STRUCTURE>', MAP_AGENTS_STRUCTURE)
       template.sub!('<MAP_AGENTS>', MAP_AGENTS)
     else
-      template.sub!('<MAP_AGENTS_STRUCTURE>','')
-      template.sub!('<MAP_AGENTS>','')
+      template.slice!('<MAP_AGENTS_STRUCTURE>')
+      template.slice!('<MAP_AGENTS>')
     end
     template
   end
