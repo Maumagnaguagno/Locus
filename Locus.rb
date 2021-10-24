@@ -155,7 +155,7 @@ module Locus
     when /^((?:\-\+|\+|\-)?)state\((.+)\)$/
       prefix = $1
       predicate, *arguments = $2.split(/\s*,\s*/)
-      positive = predicate.sub!(/^~/,'') ? false : true
+      positive = predicate.delete_prefix!('~') ? false : true
       string << indent
       key = "\"#{predicate}"
       argument_parser(key, arguments, terms)
@@ -198,7 +198,7 @@ module Locus
     unless arguments.empty?
       str << '('
       arguments.each_with_index {|arg, index|
-        if arg =~ /^[A-Z]/
+        if arg.match?(/^[A-Z]/)
           str << "\" + action.getTerm(#{terms.index(arg)}).toString() + \""
           ground = false
         else
