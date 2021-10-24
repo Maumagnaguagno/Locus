@@ -68,6 +68,7 @@ module Locus
     count_paren = 0
     string = false
     str = IO.read(filename)
+    str.gsub!(/\/\*.*?\*\//m,'')
     str.gsub!(/\n|\/\/.*$/,'')
     str.each_char {|c|
       case c

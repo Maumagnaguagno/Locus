@@ -218,7 +218,6 @@ To cite Locus, please cite this [paper](http://www2.ic.uff.br/~wesaac2015/Procee
 
 - Add more tests
 - Check version of Jason jar being used here
-- Add multi-line comment support
 - Optional condition block for actions
 - Optional condition block for afterActions and beforeActions
 - Arity check for actions
