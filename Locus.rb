@@ -51,7 +51,7 @@ module Locus
     }'
 
   #-----------------------------------------------
-  # Command
+  # Read
   #-----------------------------------------------
 
   def read(filename)
@@ -61,7 +61,7 @@ module Locus
     str = IO.read(filename)
     str.gsub!(/\/\*.*?\*\//m,'')
     str.gsub!(/\n|\/\/.*$/,'')
-    str.each_char {|c|
+    str.scan(/[."()]|[^."()]+/) {|c|
       case c
       when '.'
         if count_paren.zero? and not string
