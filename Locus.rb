@@ -67,7 +67,7 @@ module Locus
         if count_paren.zero? and not string
           # Only triggering events can be matched, several blocks are optional
           # [prefix] event[(terms)] [: context] [<- body]
-          if group =~ /^\s*([-+~]+)?(\w+)(?:\((.*?)\))?(?:\s*:\s*(.+?))?(?:\s*<-\s*(.+))?\s*$/
+          if group =~ /^\s*([-+~]+)?(\w+)(?:\((.*?)\))?(?:\s*:\s*(.+?))?(?:\s*<-\s*(\S.*))?\s*$/
             if respond_to?(event = $2)
               prefix = $1
               terms = $3
@@ -297,10 +297,8 @@ module Locus
 
   def action(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} must be '+' for action command" if prefix != '+'
-    if body.empty?
-      puts "Warning: action #{terms.first} have no body"
-    else
-      @actions << [terms.shift, terms, context, body]
+    if body and not body.empty? then @actions << [terms.shift, terms, context, body]
+    else puts "Warning: action #{terms.first} have no body"
     end
   end
 
