@@ -354,8 +354,7 @@ if $0 == __FILE__
         # Convert
         javaenv = Locus.to_java(filename)
         # Save to file
-        filename.sub!(/esl$/,'java')
-        IO.write(filename, javaenv)
+        IO.write(filename = filename.sub(/esl$/,'java'), javaenv)
         puts "Saved to file #{filename}"
       else puts "File not found: #{filename}!"
       end
