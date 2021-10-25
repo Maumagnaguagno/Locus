@@ -73,9 +73,7 @@ module Locus
               terms = $3
               context = $4
               body = $5
-              terms = terms.split(/\s*,\s*/) if terms
-              body = body.split(/\s*;\s*/) if body
-              send(event, prefix, terms, context, body)
+              send(event, prefix, terms&.split(/\s*,\s*/), context, body&.split(/\s*;\s*/))
             else puts "Error: No match for #{event}"
             end
           end
