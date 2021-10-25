@@ -223,6 +223,7 @@ To cite Locus, please cite this [paper](http://www2.ic.uff.br/~wesaac2015/Procee
 - Arity check for actions
 - Complex formulas in conditions (&/|/~/not/())
 - Unifications
+- Integer support for non string terms
 - Add perception checks (context)
 - Add belief check (context)
 - Add different term type support

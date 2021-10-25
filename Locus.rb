@@ -17,15 +17,6 @@
 # Mar 2015
 # - Tests
 #-----------------------------------------------
-# TODOs
-# - Multi-line comment support /* Comment */
-# - Optional condition block for actions
-# - Optional condition block for afterActions and beforeActions
-# - Arity check for actions
-# - Complex formulas in conditions (&/|/~/not/())
-# - Unifications
-# - Integer support for non string terms
-#-----------------------------------------------
 
 module Locus
   extend self
