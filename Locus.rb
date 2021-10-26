@@ -139,7 +139,7 @@ module Locus
       string << ";\n" if close_command
       string << indent << "}\n" if condition
     # State
-    when /^((?:\-\+|\+|\-)?)state\((.+)\)$/
+    when /^(-?\+?)state\((.+)\)$/
       prefix = $1
       predicate, *arguments = $2.split(/\s*,\s*/)
       positive = predicate.delete_prefix!('~') ? false : true
