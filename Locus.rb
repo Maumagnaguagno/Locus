@@ -57,14 +57,13 @@ module Locus
   def read(filename)
     group = ''
     count_paren = 0
-    string = false
     str = IO.read(filename)
     str.gsub!(/\/\*.*?\*\//m,'')
     str.gsub!(/\n|\/\/.*$/,'')
-    str.scan(/[."()]|[^."()]+/) {|c|
+    str.scan(/[.()]|"[^"]*"|[^."()]+/) {|c|
       case c
       when '.'
-        if count_paren.zero? and not string
+        if count_paren.zero?
           # Only triggering events can be matched, several blocks are optional
           # [prefix] event[(terms)] [: context] [<- body]
           if group =~ /^\s*([-+~]+)?(\w+)(?:\((.*?)\))?(?:\s*:\s*(.+?))?(?:\s*<-\s*(\S.*))?\s*$/
@@ -80,15 +79,15 @@ module Locus
           group.clear
           next
         end
-      when '"'
-        string = !string
       when '('
-        count_paren += 1 unless string
+        count_paren += 1
       when ')'
-        raise "Unmatched parentheses for #{str}" if not string and (count_paren -= 1) < 0
+        raise "Missing open parentheses in #{group}" if (count_paren -= 1) < 0
       end
       group << c
     }
+    raise "Missing close parentheses in #{group}" if count_paren != 0
+    raise "Malformed expression in #{group}" unless group.empty?
   end
 
   #-----------------------------------------------
