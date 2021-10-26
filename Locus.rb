@@ -71,12 +71,12 @@ module Locus
               context = $4
               body = $5
               send(event, prefix, terms&.split(/\s*,\s*/), context, body&.split(/\s*;\s*/))
+              group.clear
+              next
             else raise "No match for #{event}"
             end
           else raise "Malformed expression in #{group}"
           end
-          group.clear
-          next
         end
       when '('
         count_paren += 1
