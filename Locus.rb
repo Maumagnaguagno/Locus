@@ -57,7 +57,7 @@ module Locus
   def read(filename)
     group = ''
     count_paren = 0
-    (str = IO.read(filename)).gsub!(/\/\/[^\n]*$|\/\*.*?\*\/|\n/m,'')
+    (str = File.read(filename)).gsub!(/\/\/[^\n]*$|\/\*.*?\*\/|\n/m,'')
     str.scan(/[.()]|[^.()]+/) {|c|
       case c
       when '.'
@@ -315,7 +315,7 @@ module Locus
     # Read file and match non-recursive commands
     read(filename)
     # Template fields are updated with data
-    template = IO.read('locus_env.java')
+    template = File.read('locus_env.java')
     template.gsub!('<ENVIRONMENT_NAME>', @environment_name)
     template.sub!('<TIME>', Time.now.to_s)
     template.sub!('<IMPORTS>', import_string)
@@ -348,7 +348,7 @@ if $0 == __FILE__
         # Convert
         javaenv = Locus.to_java(filename)
         # Save to file
-        IO.write(filename = filename.sub(/esl$/,'java'), javaenv)
+        File.write(filename = filename.sub(/esl$/,'java'), javaenv)
         puts "Saved to file #{filename}"
       else puts "File not found: #{filename}!"
       end
