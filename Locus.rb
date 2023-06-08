@@ -57,7 +57,7 @@ module Locus
   def read(filename)
     group = ''
     count_paren = 0
-    (str = File.read(filename)).gsub!(/\/\/[^\n]*$|\/\*.*?\*\/|\n/m,'')
+    (str = File.read(filename)).gsub!(/\/\/[^\n]*|\/\*.*?\*\/|\n/m,'')
     str.scan(/[.()]|[^.()]+/) {|c|
       case c
       when '.'

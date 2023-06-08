@@ -8,8 +8,8 @@ class Test_Locus < Test::Unit::TestCase
     result = Locus.to_java("examples/#{filename}.esl")
     original = IO.read("examples/#{filename}.java")
     # Ignore timestamp
-    result.slice!(/Generated at .*$/)
-    original.slice!(/Generated at .*$/)
+    result.slice!(/Generated at .*/)
+    original.slice!(/Generated at .*/)
     assert_equal(result, original)
   end
 
