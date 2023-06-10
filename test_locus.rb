@@ -6,7 +6,7 @@ class Test_Locus < Test::Unit::TestCase
   def compare_files(filename)
     # Result is compared with original file tested with Jason
     result = Locus.to_java("examples/#{filename}.esl")
-    original = IO.read("examples/#{filename}.java")
+    original = File.read("examples/#{filename}.java")
     # Ignore timestamp
     result.slice!(/Generated at .*/)
     original.slice!(/Generated at .*/)
