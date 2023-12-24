@@ -294,7 +294,7 @@ module Locus
   def action(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} must be '+' for action command" if prefix != '+'
     if body and not body.empty? then @actions << [terms.shift, terms, context, body]
-    else puts "Warning: action #{terms.first} have no body"
+    else puts "Warning: action #{terms[0]} have no body"
     end
   end
 
@@ -342,8 +342,8 @@ end
 #-----------------------------------------------
 if $0 == __FILE__
   begin
-    if ARGV.size == 1 and ARGV.first != '-h'
-      filename = ARGV.first
+    if ARGV.size == 1 and ARGV[0] != '-h'
+      filename = ARGV[0]
       if File.exist?(filename)
         # Convert
         javaenv = Locus.to_java(filename)
