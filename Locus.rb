@@ -350,12 +350,13 @@ if $0 == __FILE__
         # Save to file
         File.write(filename = filename.sub(/esl$/,'java'), javaenv)
         puts "Saved to file #{filename}"
-      else puts "File not found: #{filename}!"
+      else abort("File not found: #{filename}")
       end
     else
       puts 'Use Locus filename.esl'
     end
   rescue
     puts $!, $@
+    exit(2)
   end
 end
