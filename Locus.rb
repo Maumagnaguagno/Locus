@@ -142,7 +142,7 @@ module Locus
     when /^(-?\+?)state\((.+)\)$/
       prefix = $1
       predicate, *arguments = $2.split(/\s*,\s*/)
-      positive = predicate.delete_prefix!('~') ? false : true
+      positive = !predicate.delete_prefix!('~')
       string << indent
       key = "\"#{predicate}"
       argument_parser(key, arguments, terms)
