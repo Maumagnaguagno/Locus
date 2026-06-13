@@ -161,12 +161,12 @@ module Locus
       string << ";\n" if close_command
     # AgentClass
     when /^agentClass\((.+)\)$/
-      string << "this.agents.get(agName).equals(\"#{$1}\")"
+      string << "this.agents.get(agName).equals(\"#$1\")"
       string << ";\n" if close_command
       @map_agents = true
     # AgentName
     when /^agentName\((.+)\)$/
-      string << "agName.equals(\"#{$1}\")"
+      string << "agName.equals(\"#$1\")"
       string << ";\n" if close_command
     # Consider Java inline
     else
