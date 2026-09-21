@@ -294,7 +294,7 @@ module Locus
   def action(prefix, terms, context, body)
     puts "Warning: prefix #{prefix} must be '+' for action command" if prefix != '+'
     if body and not body.empty? then @actions << [terms.shift, terms, context, body]
-    else puts "Warning: action #{terms[0]} have no body"
+    else puts "Warning: action #{terms[0]} has no body"
     end
   end
 
